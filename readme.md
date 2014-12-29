@@ -26,3 +26,9 @@ This will be ongoing and most likely never be finished because the goals can nev
 - Language Versions: R: R 3.0.2 GUI 1.62 Snow Leopard build (6558)
 - Python: Python 2.7.5, D3: [http://d3js.org/d3.v3.min.js](http://d3js.org/d3.v3.min.js)
 
+#Sample
+
+This a prototype plot for displaying character distribution. Color signifies chapeter.
+
+![plot](./r/Rplot01.png)
+

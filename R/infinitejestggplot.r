@@ -90,7 +90,9 @@ ggplot() +
 		  alpha = .4) +
     ylab("") + 
   	xlab("") +
-    theme_bw()
+    theme_bw() +
+    theme(legend.position="none", 
+          axis.text.x  = element_text(size=8))
 
 ##Subset by chapter just to see
 head(charPos)
