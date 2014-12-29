@@ -30,5 +30,5 @@ This will be ongoing and most likely never be finished because the goals can nev
 
 This a prototype plot for displaying character distribution. Color signifies chapeter.
 
-![plot](./r/Rplot01.png)
+![plot](./R/Rplot01.png)
 
