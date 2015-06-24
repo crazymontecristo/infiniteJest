@@ -28,7 +28,7 @@ This will be ongoing and most likely never be finished because the goals can nev
 
 #Sample
 
-This a prototype plot for displaying character distribution. Color signifies chapeter.
+This a prototype plot for displaying character distribution. Color signifies chapter.
 
 ![plot](./R/Rplot01.png)
 
