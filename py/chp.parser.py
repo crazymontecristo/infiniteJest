@@ -2,10 +2,8 @@
 #chp3.py
 #Ciera Martinez
 
-#There are two arguments 
+#arguments 
 #1. a file that containts text to search
-#example command
-#
 
 import re
 import sys	
