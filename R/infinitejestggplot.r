@@ -8,6 +8,7 @@
 #Required Libraries
 library(ggplot2)
 library(dplyr)
+library(scales)
 
 #1. Chapter Position
 # read in ch.parser.py output
@@ -120,6 +121,41 @@ head(charPos)
 head(chapPos)
 
 
+# Plot that shows the length
+str(chapPos)
+chapPos$chapter <- gsub("ch", "", chapPos$chapter)
 
+# Make NA endnotes
+chapPos$chapter[is.na(chapPos$chapter)] <- "endnotes"
+
+# add words per page value
+chapPos$page <- chapPos$length / 250
+
+ggplot(chapPos, aes(chapter, page)) + 
+  geom_bar(stat = "identity") +
+  ylab("Pages") +
+  xlab("Chapter") +
+  theme_bw() +
+  scale_y_continuous(labels=comma) +
+  theme(legend.position="none", 
+        text = element_text(size=20),
+        axis.text.x  = element_text(angle = 45, hjust = 1, size = 14)) 
+  
+# Words per minute Avg = 200
+
+chapPos$time <- (chapPos$length / 200) / 60 
+number_ticks <- 20
+
+ggplot(chapPos, aes(chapter, time)) + 
+  geom_bar(stat = "identity") +
+  ylab("Time (hours)") +
+  xlab("Chapter") +
+  theme_bw() +
+  scale_y_continuous(labels=comma, breaks = pretty_breaks(20)) +
+  theme(legend.position="none", 
+        text = element_text(size=20),
+        axis.text.x  = element_text(angle = 45, hjust = 1, size = 14)) 
+
+sum(chapPos$time)
 
 
