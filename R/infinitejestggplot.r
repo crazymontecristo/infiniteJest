@@ -51,11 +51,19 @@ ints <- ceiling(findInterval(charPos[[2]], breaks)/2)
 
 charPos$chp <- chapPos[ints, 1]
 
+## data summary
+str(charPos)
+dim(charPos)
+head(charPos)
+
+summary(as.factor(charPos$chp))
+
 #Visualization 1
 #Quickly just get a sense for how many times a character is mentioned
+
 ggplot(charPos, aes(term)) +
-  geom_bar(stat = "bin") +
-  coord_flip() +
+  geom_bar(stat = "count") +
+    coord_flip() +
   theme_bw() +
   theme(text = element_text(),
         axis.text.x = element_text(angle=90, 
@@ -64,35 +72,41 @@ ggplot(charPos, aes(term)) +
 #Visualization 2
 #Now I want to see the distribution 
 
-#First get rectangles for chapter delimiters for the chapter graph at the bottom.
-rect_left <- chapPos[['position']]
-rect_left
+# This set squares that represent chapter width.
+# It would be great to have this go all the way to the top and be different colors,
+# to delineate the sides better. 
+# rectangles for chapter delimiters for the chapter graph at the bottom.
 
-rect_right <- chapPos[['length']]
-rect_right
+# rect_left <- chapPos[['position']]
+# rect_left
+# 
+# rect_right <- chapPos[['length']]
+# rect_right
+# 
+# rect_right
+# rectangles <- data.frame(
+#   xmin = rect_left,
+#   xmax = rect_left + (rect_right - 500),
+#   ymin = 0,
+#   ymax = .5
+# )
 
-rect_right
-rectangles <- data.frame(
-  xmin = rect_left,
-  xmax = rect_left + (rect_right - 500),
-  ymin = 0,
-  ymax = .5
-)
+# re-order by frequency of character
+# first I have to attach frequency as a column to the dataset.
+
+reorder_size <- function(x) {
+  factor(x, levels = names(sort(table(x))))
+}
 
 ggplot() + 
-	geom_point(
-		data = charPos, 
-		aes(x = position, y = term, color = chp))	+
-	geom_rect(
-		data = rectangles, 
-		aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax), 
-		  fill = 'blue', 
-		  alpha = .4) +
-    ylab("") + 
-  	xlab("") +
-    theme_bw() +
-    theme(legend.position="none", 
-          axis.text.x  = element_text(size=8))
+  geom_point(
+    data = charPos, 
+    aes(x = position, y = reorder_size(term), alpha = 1/40))	+
+  ylab("") + 
+  xlab("") +
+  theme_bw() +
+  theme(legend.position="none", 
+        axis.text.x  = element_text(size=8))
 
 ##Subset by chapter just to see
 head(charPos)
@@ -101,7 +115,9 @@ head(charPos)
 chapter7 <- subset(charPos, charPos$chp == "ch07") 
 chapter7
 
-
+# Merge together to make new plot.  Basically I just want chapter on the X axis
+head(charPos)
+head(chapPos)
 
 
 
