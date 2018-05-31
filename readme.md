@@ -30,5 +30,9 @@ This will be ongoing and most likely never be finished because the goals can nev
 
 This a prototype plot for displaying character distribution. Color signifies chapter.
 
-![plot](./R/Rplot01.png)
+![plot](./images/Rplot01.png)
+
+Also, the time it takes for reading the book with an average reading speed of 200 words per minute. 
+
+![readingplot](./images/figure1_time_to_read_book.png)
 
